@@ -54,9 +54,9 @@ app.use((err, req, res, next) => {
     res.status(500).send({ message: 'Something broke!', error: err.message });
 });
 
-// Puerto de la API
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}.`);
-    console.log(`Swagger UI available at http://localhost:${PORT}/api-docs`);
-});
+// Puerto de la API (Vercel no usa app.listen en este contexto)
+// Dejamos el PORT definido para referencias si es necesario, pero el .listen se exporta.
+const PORT = process.env.PORT || 3000; // Puedes incluso remover esta línea si no la usas en otro lugar.
+
+// Exportar la aplicación para que Vercel la use como una Serverless Function
+module.exports = app;
